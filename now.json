@@ -5,6 +5,7 @@
       "dest": "/dataset/_id/r/resource/_resource/row/_row.html"
     },
     { "src": "/dataset/(?<id>[^/]+)/r/(?<resource>[^/]+)", "dest": "/dataset/_id/r/resource/_resource/_resource.html" },
-    { "src": "/dataset/(?<id>[^/]+)", "dest": "/dataset/_id.html" }
+    { "src": "/dataset/(?<id>[^/]+)", "dest": "/dataset/_id.html" },
+    { "src": "/api", "dest": "/api/index.js" }
   ]
 }
