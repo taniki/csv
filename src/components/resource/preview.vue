@@ -129,7 +129,6 @@ export default {
           let params = `_offset=${(ctx.currentPage - 1) * ctx.perPage}&_shape=objects`
 
           if (!this.showRowId) {
-            console.log('ik')
             params += '&_rowid=hide'
           }
 

@@ -1,36 +1,62 @@
 <template>
-  <div>
-    <b-container class="pt-5">
-      <h1>{{ dataset.title }}</h1>
+  <layout>
+    <div>
+      <apollo-query
+        :query="gql => gql`
+      query ($id: ID) {
+        dataset (id: $id){
+          title
+          page
+          description
 
-      <a :href="dataset.page">permalien</a>
+          resources {
+            id
+            url
+            title
+          }
+        }
+      }
+      `"
+        :variables="{ id }"
+      >
+        <template v-slot="{ result: { loading, error, data } }">
+          <div v-if="error">
+            {{ error }}
+          </div>
+          <div v-if="loading" />
+          <div v-if="data">
+            <b-container class="pt-5">
+              <h1>{{ data.dataset.title }}</h1>
 
-      <div
-        class="my-4"
-        v-html="parse(dataset.description)"
-      />
+              <a :href="data.dataset.page">permalien</a>
 
-      <h3 class="text-muted">
-        Ressources
-      </h3>
+              <div
+                class="my-4"
+                v-html="parse(data.dataset.description)"
+              />
 
-      <dataset-resources :dataset="dataset" />
+              <h3 class="text-muted">
+                Ressources
+              </h3>
 
-      <b-container />
-    </b-container>
-  </div>
+              <dataset-resources :dataset="data.dataset" />
+            </b-container>
+          </div>
+        </template>
+      </apollo-query>
+    </div>
+  </layout>
 </template>
 
 <script>
 import DatasetResources from '~/components/dataset/resources'
 
-import Api from '~/services/api'
+import gql from 'graphql-tag'
+
 import unified from 'unified'
 import markdown from 'remark-parse'
 import html from 'remark-html'
 import breaks from 'remark-breaks'
-
-const $api = new Api()
 
 const $processor = unified()
   .use(markdown)
@@ -41,6 +67,7 @@ export default {
   components: { DatasetResources },
   data () {
     return {
+      id: null,
       data: null,
       dataset: {}
     }
@@ -52,8 +79,6 @@ export default {
   },
   async mounted () {
     const { id } = this.$route.params
-    const res = await $api.get(`datasets/${id}`)
-    this.dataset = res.data
     this.id = id
   }
 }

@@ -1,22 +1,24 @@
 <template>
-  <div>
-    <b-table
-      stacked
-      :fields="fields"
-      :items="row"
-    />
-  </div>
+  <layout>
+    <client-only>
+      <div>
+        <b-table
+          stacked
+          :fields="fields"
+          :items="row"
+        />
+      </div>
+    </client-only>
+  </layout>
 </template>
 
 <script>
-import ResourcePreview from '~/components/resource/preview'
 import axios from 'axios'
 import Api from '~/services/api'
 
 const $api = new Api()
 
 export default {
-  components: { ResourcePreview },
   data () {
     return {
       resource: null,
@@ -39,6 +41,9 @@ export default {
         }
       })
     }
+  },
+  apollo: {
+    $prefetch: false
   },
   async mounted () {
     const url = 'https://csvapi.data.gouv.fr/apify'
