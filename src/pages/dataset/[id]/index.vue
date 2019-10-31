@@ -3,20 +3,20 @@
     <div>
       <apollo-query
         :query="gql => gql`
-      query ($id: ID) {
-        dataset (id: $id){
-          title
-          page
-          description
+          query ($id: ID) {
+            dataset (id: $id){
+              title
+              page
+              description
 
-          resources {
-            id
-            url
-            title
+              resources {
+                id
+                url
+                title
+              }
+            }
           }
-        }
-      }
-      `"
+        `"
         :variables="{ id }"
       >
         <template v-slot="{ result: { loading, error, data } }">
