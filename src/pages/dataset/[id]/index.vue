@@ -51,8 +51,6 @@
 <script>
 import DatasetResources from '~/components/dataset/resources'
 
-import gql from 'graphql-tag'
-
 import unified from 'unified'
 import markdown from 'remark-parse'
 import html from 'remark-html'
