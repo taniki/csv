@@ -20,6 +20,8 @@
           bordered
           small
           hover
+          :fields="fields"
+          primary-key="rowid"
           :items="provider"
           head-variant="light"
           :no-border-collapse="true"
@@ -28,6 +30,14 @@
           :per-page="perPage"
           :current-page="currentPage"
         >
+          <template #cell(rowid)="data">
+            <b-link
+              append
+              :to="`row/${data.item.rowid}`"
+            >
+              {{ data.item.rowid }}
+            </b-link>
+          </template>
           <template
             v-slot:table-caption
             v-if="error"
@@ -72,13 +82,17 @@
     margin-left: -50vw;
     left: 50%;
 }
+
+.full-height {
+  height: 100vh;
+}
 </style>
 
 <script>
 import axios from 'axios'
 
 export default {
-  props: ['resource'],
+  props: ['resource', 'showRowId'],
   data () {
     return {
       endpoint: null,
@@ -86,7 +100,18 @@ export default {
       error: null,
       currentPage: 1,
       perPage: 100,
-      loading: true
+      loading: true,
+      columns: []
+    }
+  },
+  computed: {
+    fields () {
+      return [
+        {
+          key: 'rowid',
+          isRowHeader: true
+        }, ...this.columns.filter(c => c !== 'rowid')
+      ]
     }
   },
   async mounted () {
@@ -101,7 +126,13 @@ export default {
           return this.endpoint
         })
         .then(endpoint => {
-          const params = `_offset=${(ctx.currentPage - 1) * ctx.perPage}&_shape=objects&_rowid=hide`
+          let params = `_offset=${(ctx.currentPage - 1) * ctx.perPage}&_shape=objects`
+
+          if (!this.showRowId) {
+            console.log('ik')
+            params += '&_rowid=hide'
+          }
+
           return axios.get(`${endpoint}?${params}`)
         })
         .then(res => {

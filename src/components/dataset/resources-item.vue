@@ -4,6 +4,13 @@
       {{ resource.title }}
     </h3>
 
+    <b-link
+      :to="previewURL"
+      append
+    >
+      lien
+    </b-link>
+
     <a :href="resource.url">permalien</a>
 
     <h4 class="mt-4">
@@ -26,6 +33,11 @@ import ResourcePreview from '~/components/resource/preview'
 
 export default {
   components: { ResourceColumns, ResourcePreview },
-  props: ['resource']
+  props: ['resource'],
+  computed: {
+    previewURL () {
+      return `r/${this.resource.id}`
+    }
+  }
 }
 </script>

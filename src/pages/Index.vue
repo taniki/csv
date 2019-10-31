@@ -13,6 +13,11 @@
           Open Food Facts - Produits alimentaires : ingrédients, nutrition, labels
         </g-link>
       </li>
+      <li>
+        <g-link to="/dataset/inventaire-des-depots-de-code-source-des-organismes-publics">
+          Inventaire des dépôts de code source des organismes publics
+        </g-link>
+      </li>
     </ul>
   </Layout>
 </template>
