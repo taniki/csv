@@ -23,7 +23,17 @@
           <div v-if="error">
             {{ error }}
           </div>
-          <div v-if="loading" />
+          <div
+            v-if="loading"
+            class="loading d-flex flex-column justify-content-center"
+          >
+            <div class="text-center">
+              <b-spinner
+                label="Loading..."
+                variant="secondary"
+              />
+            </div>
+          </div>
           <div v-if="data">
             <b-container class="pt-5">
               <h1>{{ data.dataset.title }}</h1>
@@ -47,6 +57,12 @@
     </div>
   </layout>
 </template>
+
+<style scoped>
+.loading {
+  height: 100vh;
+}
+</style>
 
 <script>
 import DatasetResources from '~/components/dataset/resources'
