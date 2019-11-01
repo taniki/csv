@@ -11,6 +11,19 @@ module.exports = function (api) {
   })
 
   api.createPages(({ createPage }) => {
-    // Use the Pages API here: https://gridsome.org/docs/pages-api/
+    createPage({
+      path: '/dataset/:id/r/:resource/row/:row',
+      component: './src/templates/row.vue'
+    })
+
+    createPage({
+      path: '/dataset/:id/r/:resource',
+      component: './src/templates/resource.vue'
+    })
+
+    createPage({
+      path: '/dataset/:id',
+      component: './src/templates/dataset.vue'
+    })
   })
 }
