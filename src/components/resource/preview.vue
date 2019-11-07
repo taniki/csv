@@ -120,7 +120,7 @@ export default {
     provider (ctx, callback) {
       const url = 'https://csvapi.data.gouv.fr/apify'
       this.loading = true
-      axios.get(`${url}?url=${this.resource.url}`)
+      axios.get(`${url}?url=${encodeURIComponent(this.resource.url)}`)
         .then((res) => {
           this.endpoint = res.data.endpoint
           return this.endpoint
@@ -142,7 +142,13 @@ export default {
         })
         .catch((error) => {
           this.loading = false
-          this.error = error.toString()
+
+          if (error.response) {
+            this.error = error.response.data.error
+          } else {
+            this.error = error.toString()
+          }
+
           callback(null)
         })
 
