@@ -1,24 +1,26 @@
 <template>
   <Layout>
-    <h3>Exemples</h3>
+    <b-container>
+      <h3>Exemples</h3>
 
-    <ul>
-      <li>
-        <g-link to="/dataset/catalogue-des-donnees-de-data-gouv-fr">
-          Catalogue des données de data.gouv.fr
-        </g-link>
-      </li>
-      <li>
-        <g-link to="/dataset/open-food-facts-produits-alimentaires-ingredients-nutrition-labels">
-          Open Food Facts - Produits alimentaires : ingrédients, nutrition, labels
-        </g-link>
-      </li>
-      <li>
-        <g-link to="/dataset/inventaire-des-depots-de-code-source-des-organismes-publics">
-          Inventaire des dépôts de code source des organismes publics
-        </g-link>
-      </li>
-    </ul>
+      <ul>
+        <li>
+          <g-link to="/dataset/catalogue-des-donnees-de-data-gouv-fr">
+            Catalogue des données de data.gouv.fr
+          </g-link>
+        </li>
+        <li>
+          <g-link to="/dataset/open-food-facts-produits-alimentaires-ingredients-nutrition-labels">
+            Open Food Facts - Produits alimentaires : ingrédients, nutrition, labels
+          </g-link>
+        </li>
+        <li>
+          <g-link to="/dataset/inventaire-des-depots-de-code-source-des-organismes-publics">
+            Inventaire des dépôts de code source des organismes publics
+          </g-link>
+        </li>
+      </ul>
+    </b-container>
   </Layout>
 </template>
 
